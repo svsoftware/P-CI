@@ -14,9 +14,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Hola mundo-");
+        // TODO code application logic here        
+
+        System.out.println("Hola mundo");
+         System.out.println("Hola mundo2222");
+         System.out.println("Hola compañeritos");
+         System.out.println("Daniel");
          
+
     }
     
 }
