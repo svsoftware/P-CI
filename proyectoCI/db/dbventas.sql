@@ -18,6 +18,36 @@ USE `dbventas`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cliente` (
+  `cod_cli` varchar(6) NOT NULL,
+  `nom_cli` varchar(200) NOT NULL,
+  `apel_cli` varchar(200) NOT NULL,
+  `dni_cli` varchar(8) DEFAULT NULL,
+  `ruc_cli` varchar(11) DEFAULT NULL,
+  `dir_cli` varchar(200) DEFAULT NULL,
+  `email_cli` varchar(100) DEFAULT NULL,
+  `tel_cli` varchar(9) DEFAULT NULL,
+  `estado_cli` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`cod_cli`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='creando tabla lciente y relacionadola';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comprobante`
 --
 
@@ -37,7 +67,9 @@ CREATE TABLE `comprobante` (
   `total` decimal(15,2) NOT NULL,
   `fec_comp` date NOT NULL,
   `est_com` varchar(1) NOT NULL,
-  PRIMARY KEY (`idcomprobante`)
+  PRIMARY KEY (`idcomprobante`),
+  KEY `FK_cod_cli_idx` (`cod_cli`),
+  CONSTRAINT `FK_cod_cli` FOREIGN KEY (`cod_cli`) REFERENCES `cliente` (`cod_cli`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Creación de la tabla comprobante   08/06/2015.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-08 19:05:56
+-- Dump completed on 2015-06-09 18:44:07
