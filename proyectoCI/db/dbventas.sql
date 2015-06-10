@@ -1,30 +1,32 @@
-CREATE DATABASE  IF NOT EXISTS `dbventas` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `dbventas`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- phpMyAdmin SQL Dump
+-- version 3.4.10.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1    Database: dbventas
--- ------------------------------------------------------
--- Server version	5.5.20-log
+-- Servidor: localhost
+-- Tiempo de generación: 10-06-2015 a las 21:43:57
+-- Versión del servidor: 5.5.20
+-- Versión de PHP: 5.3.10
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cliente`
+-- Base de datos: `dbventas`
 --
 
-DROP TABLE IF EXISTS `cliente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cliente` (
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE IF NOT EXISTS `cliente` (
   `cod_cli` varchar(6) NOT NULL,
   `nom_cli` varchar(200) NOT NULL,
   `apel_cli` varchar(200) NOT NULL,
@@ -36,25 +38,31 @@ CREATE TABLE `cliente` (
   `estado_cli` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`cod_cli`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='creando tabla lciente y relacionadola';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cliente`
+-- Volcado de datos para la tabla `cliente`
 --
 
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `cliente` (`cod_cli`, `nom_cli`, `apel_cli`, `dni_cli`, `ruc_cli`, `dir_cli`, `email_cli`, `tel_cli`, `estado_cli`) VALUES
+('CL0001', 'Juan', 'Barrantes', '14789652', '12457898521', 'Los Arces 202', NULL, '215487', 'A'),
+('CL0002', 'Maria', 'Salas', '98653214', '', 'Los girasoles 303', NULL, '548798', 'A'),
+('CL0003', 'Pedro', 'Valencia', '54898652', '', 'Av melgar 202', NULL, '986532147', 'A'),
+('CL0004', 'Jesenia', 'Velarde', '78451235', '', 'Los Arces 2020', NULL, '124578', 'A'),
+('CL0005', 'Roberto', 'Corrales', '', '14785236987', 'Los Arces 303', NULL, '986578457', 'A'),
+('CL0006', 'Luana', 'Cortisales', '', '12345678965', 'Av aviacion 1200', NULL, '457896214', 'A'),
+('CL0007', 'Paul', 'Morales', '98745878', '', 'Cayma 205', NULL, '147852369', 'A'),
+('CL0008', 'Sergio', 'Tejada', '21578954', NULL, 'Merino Rosales 456', NULL, '95862478', 'A'),
+('CL0009', 'Gustavo', 'Ferreyros', '21548798', NULL, 'J.B 47 A', NULL, '147852', 'A'),
+('CL0010', 'Daniel', 'Alcca', '98653214', NULL, 'Melgar 203', NULL, '145875', 'A'),
+('CL0011', 'Carlos', 'Zagastizabal', '45862178', NULL, 'Paucarpata 205', NULL, '215487', 'A');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `comprobante`
+-- Estructura de tabla para la tabla `comprobante`
 --
 
-DROP TABLE IF EXISTS `comprobante`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comprobante` (
+CREATE TABLE IF NOT EXISTS `comprobante` (
   `idcomprobante` varchar(10) NOT NULL,
   `cod_cli` varchar(6) NOT NULL,
   `cod_ven` varchar(6) NOT NULL,
@@ -69,29 +77,16 @@ CREATE TABLE `comprobante` (
   `est_com` varchar(1) NOT NULL,
   PRIMARY KEY (`idcomprobante`),
   KEY `FK_cod_cli_idx` (`cod_cli`),
-  KEY `fk_cod_ven_idx` (`cod_ven`),
-  CONSTRAINT `fk_cod_ven` FOREIGN KEY (`cod_ven`) REFERENCES `vendedor` (`cod_ven`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cod_cli` FOREIGN KEY (`cod_cli`) REFERENCES `cliente` (`cod_cli`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_cod_ven_idx` (`cod_ven`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Creación de la tabla comprobante   08/06/2015.';
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `comprobante`
+-- Estructura de tabla para la tabla `detalle_comprobante`
 --
 
-LOCK TABLES `comprobante` WRITE;
-/*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `detalle_comprobante`
---
-
-DROP TABLE IF EXISTS `detalle_comprobante`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `detalle_comprobante` (
+CREATE TABLE IF NOT EXISTS `detalle_comprobante` (
   `id_detalle_c` int(11) NOT NULL AUTO_INCREMENT,
   `id_comprobante` varchar(10) NOT NULL,
   `cod_pro` varchar(6) NOT NULL,
@@ -100,57 +95,32 @@ CREATE TABLE `detalle_comprobante` (
   `pre_total` decimal(15,2) NOT NULL,
   PRIMARY KEY (`id_detalle_c`),
   KEY `ifk_comprobante_idx` (`id_comprobante`),
-  KEY `fk_codpr_idx` (`cod_pro`),
-  CONSTRAINT `fk_codpr` FOREIGN KEY (`cod_pro`) REFERENCES `productos` (`cod_pro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `ifk_comprobante` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`idcomprobante`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `fk_codpr_idx` (`cod_pro`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `detalle_comprobante`
+-- Estructura de tabla para la tabla `productos`
 --
 
-LOCK TABLES `detalle_comprobante` WRITE;
-/*!40000 ALTER TABLE `detalle_comprobante` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detalle_comprobante` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `productos`
---
-
-DROP TABLE IF EXISTS `productos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `productos` (
+CREATE TABLE IF NOT EXISTS `productos` (
   `cod_pro` varchar(6) NOT NULL,
   `cod_proveedor` varchar(6) NOT NULL,
   `descrip_pro` varchar(200) NOT NULL,
   `precio_pro` decimal(15,2) NOT NULL,
   `stock_pro` int(11) NOT NULL,
   PRIMARY KEY (`cod_pro`),
-  KEY `fk_codpv_idx` (`cod_proveedor`),
-  CONSTRAINT `fk_codpv` FOREIGN KEY (`cod_proveedor`) REFERENCES `proveedor` (`cod_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_codpv_idx` (`cod_proveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `productos`
+-- Estructura de tabla para la tabla `proveedor`
 --
 
-LOCK TABLES `productos` WRITE;
-/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `proveedor`
---
-
-DROP TABLE IF EXISTS `proveedor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proveedor` (
+CREATE TABLE IF NOT EXISTS `proveedor` (
   `cod_proveedor` varchar(6) NOT NULL,
   `nom_pv` varchar(200) NOT NULL,
   `dir_pv` varchar(200) NOT NULL,
@@ -158,25 +128,14 @@ CREATE TABLE `proveedor` (
   `email_pv` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`cod_proveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `proveedor`
+-- Estructura de tabla para la tabla `vendedor`
 --
 
-LOCK TABLES `proveedor` WRITE;
-/*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `vendedor`
---
-
-DROP TABLE IF EXISTS `vendedor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vendedor` (
+CREATE TABLE IF NOT EXISTS `vendedor` (
   `cod_ven` varchar(6) NOT NULL,
   `nom_ven` varchar(200) NOT NULL,
   `ape_ven` varchar(200) NOT NULL,
@@ -188,24 +147,31 @@ CREATE TABLE `vendedor` (
   `email_ven` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`cod_ven`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vendedor`
+-- Restricciones para tablas volcadas
 --
 
-LOCK TABLES `vendedor` WRITE;
-/*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Filtros para la tabla `comprobante`
+--
+ALTER TABLE `comprobante`
+  ADD CONSTRAINT `fk_cod_ven` FOREIGN KEY (`cod_ven`) REFERENCES `vendedor` (`cod_ven`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_cod_cli` FOREIGN KEY (`cod_cli`) REFERENCES `cliente` (`cod_cli`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Filtros para la tabla `detalle_comprobante`
+--
+ALTER TABLE `detalle_comprobante`
+  ADD CONSTRAINT `fk_codpr` FOREIGN KEY (`cod_pro`) REFERENCES `productos` (`cod_pro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ifk_comprobante` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`idcomprobante`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `fk_codpv` FOREIGN KEY (`cod_proveedor`) REFERENCES `proveedor` (`cod_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2015-06-09 19:34:06
