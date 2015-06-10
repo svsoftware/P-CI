@@ -4,7 +4,7 @@ USE `dbventas`;
 --
 -- Host: 127.0.0.1    Database: dbventas
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.5.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -100,6 +100,8 @@ CREATE TABLE `detalle_comprobante` (
   `pre_total` decimal(15,2) NOT NULL,
   PRIMARY KEY (`id_detalle_c`),
   KEY `ifk_comprobante_idx` (`id_comprobante`),
+  KEY `fk_codpr_idx` (`cod_pro`),
+  CONSTRAINT `fk_codpr` FOREIGN KEY (`cod_pro`) REFERENCES `productos` (`cod_pro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `ifk_comprobante` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`idcomprobante`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -111,6 +113,34 @@ CREATE TABLE `detalle_comprobante` (
 LOCK TABLES `detalle_comprobante` WRITE;
 /*!40000 ALTER TABLE `detalle_comprobante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `detalle_comprobante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `productos` (
+  `cod_pro` varchar(6) NOT NULL,
+  `cod_proveedor` varchar(6) NOT NULL,
+  `descrip_pro` varchar(200) NOT NULL,
+  `precio_pro` decimal(15,2) NOT NULL,
+  `stock_pro` int(11) NOT NULL,
+  PRIMARY KEY (`cod_pro`),
+  KEY `fk_codpv_idx` (`cod_proveedor`),
+  CONSTRAINT `fk_codpv` FOREIGN KEY (`cod_proveedor`) REFERENCES `proveedor` (`cod_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -178,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-09 19:13:11
+-- Dump completed on 2015-06-09 19:34:06
