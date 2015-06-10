@@ -4,7 +4,7 @@ USE `dbventas`;
 --
 -- Host: 127.0.0.1    Database: dbventas
 -- ------------------------------------------------------
--- Server version	5.5.20-log
+-- Server version	5.6.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -69,6 +69,8 @@ CREATE TABLE `comprobante` (
   `est_com` varchar(1) NOT NULL,
   PRIMARY KEY (`idcomprobante`),
   KEY `FK_cod_cli_idx` (`cod_cli`),
+  KEY `fk_cod_ven_idx` (`cod_ven`),
+  CONSTRAINT `fk_cod_ven` FOREIGN KEY (`cod_ven`) REFERENCES `vendedor` (`cod_ven`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_cod_cli` FOREIGN KEY (`cod_cli`) REFERENCES `cliente` (`cod_cli`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Creación de la tabla comprobante   08/06/2015.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -110,6 +112,62 @@ LOCK TABLES `detalle_comprobante` WRITE;
 /*!40000 ALTER TABLE `detalle_comprobante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `detalle_comprobante` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `proveedor`
+--
+
+DROP TABLE IF EXISTS `proveedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proveedor` (
+  `cod_proveedor` varchar(6) NOT NULL,
+  `nom_pv` varchar(200) NOT NULL,
+  `dir_pv` varchar(200) NOT NULL,
+  `tel_pv` varchar(9) DEFAULT NULL,
+  `email_pv` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`cod_proveedor`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proveedor`
+--
+
+LOCK TABLES `proveedor` WRITE;
+/*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vendedor`
+--
+
+DROP TABLE IF EXISTS `vendedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vendedor` (
+  `cod_ven` varchar(6) NOT NULL,
+  `nom_ven` varchar(200) NOT NULL,
+  `ape_ven` varchar(200) NOT NULL,
+  `dni_ven` varchar(8) NOT NULL,
+  `dir_ven` varchar(200) NOT NULL,
+  `tel_ven` varchar(9) NOT NULL,
+  `estcivil_ven` varchar(1) NOT NULL,
+  `estado_ven` varchar(1) NOT NULL,
+  `email_ven` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`cod_ven`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendedor`
+--
+
+LOCK TABLES `vendedor` WRITE;
+/*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -120,4 +178,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-09 18:44:07
+-- Dump completed on 2015-06-09 19:13:11
