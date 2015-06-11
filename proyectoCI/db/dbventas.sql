@@ -4,7 +4,7 @@ USE `dbventas`;
 --
 -- Host: 127.0.0.1    Database: dbventas
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.5.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -140,6 +140,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES ('PR0001','PV0001','Impresora Eson',450.30,10),('PR0002','PV0002','Impresora Eson  termica',950.30,5),('PR0003','PV0002','Disco duro portable toshiba 1tb',550.00,8),('PR0004','PV0004','Placa gigabite A-77',500.00,12),('PR0005','PV0005','Tarjet de red tepelink',45.20,45),('PR0006','PV0002','Toner de impresora espon',790.00,24),('PR0007','PV0003','Microprocesador I5',1200.00,17),('PR0008','PV0004','Camaras ocultas',450.30,5),('PR0009','PV0005','Router',234.00,3),('PR0010','PV0003','Monitores LG',670.00,10),('PR0011','PV0003','Monitores samsung',664.30,10),('PR0012','PV0004','Estabilizador Forza',70.00,7);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-10 19:27:21
+-- Dump completed on 2015-06-10 20:01:23
