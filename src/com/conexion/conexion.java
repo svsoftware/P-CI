@@ -6,6 +6,11 @@
 
 package com.conexion;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Christianlp
@@ -15,5 +20,21 @@ package com.conexion;
  * @project proyectoCI
  */
 public class conexion {
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/dbventas";
+    private static final String USER ="root";
+    private static final String PW = "";
+    Connection jCnn = null;
+    public Connection connection(){
+        try{
+            Class.forName(DRIVER);
+            jCnn=DriverManager.getConnection(URL,USER,PW);
+        }catch(ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, e);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return jCnn;
+    }
 
 }
