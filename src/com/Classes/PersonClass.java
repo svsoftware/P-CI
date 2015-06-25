@@ -22,7 +22,9 @@ public class PersonClass {
     private String direc;
     private String phone;
     private String mail;
-
+    private String Pass;
+    private String estado;
+    
     public String getCod() {
         return Cod;
     }
@@ -79,17 +81,40 @@ public class PersonClass {
         this.mail = mail;
     }
 
+    public String getPass() {
+        return Pass;
+    }
+
+    public void setPass(String Pass) {
+        this.Pass = Pass;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+        
+    
+    
     public PersonClass() {
     }
 
-    public PersonClass(String Cod, String name, String dni, String direc, String phone, String mail) {
+    public PersonClass(String Cod, String name, String LastName, String dni, String direc, String phone, String mail, String Pass, String estado) {
         this.Cod = Cod;
         this.name = name;
+        this.LastName = LastName;
         this.dni = dni;
         this.direc = direc;
         this.phone = phone;
         this.mail = mail;
+        this.Pass = Pass;
+        this.estado = estado;
     }
+
+   
     
 
 }
