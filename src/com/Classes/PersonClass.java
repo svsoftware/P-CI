@@ -78,6 +78,18 @@ public class PersonClass {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    public PersonClass() {
+    }
+
+    public PersonClass(String Cod, String name, String dni, String direc, String phone, String mail) {
+        this.Cod = Cod;
+        this.name = name;
+        this.dni = dni;
+        this.direc = direc;
+        this.phone = phone;
+        this.mail = mail;
+    }
     
 
 }
