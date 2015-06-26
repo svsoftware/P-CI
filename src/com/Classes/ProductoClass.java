@@ -11,13 +11,13 @@ import java.sql.Date;
  *
  * @author daniel
  */
-public class PruductoClass extends PersonClass{
+public class ProductoClass extends PersonClass{
     private String cod_proveedor;
     private String descripcion;
     private double precio,stock;
     private Date fecha;
 
-    public PruductoClass(String cod_proveedor, String descripcion, double precio, double stock, Date fecha) {
+    public ProductoClass(String cod_proveedor, String descripcion, double precio, double stock, Date fecha) {
         this.cod_proveedor = cod_proveedor;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -25,7 +25,7 @@ public class PruductoClass extends PersonClass{
         this.fecha = fecha;
     }
 
-    public PruductoClass() {
+    public ProductoClass() {
     }
 
     public String getCod_proveedor() {
