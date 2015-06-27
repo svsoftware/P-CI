@@ -9,7 +9,6 @@
  * @author Gustavo Adolfo
  */
 public class Main {
-
     /**
      * @param args the command line arguments
      */
@@ -21,7 +20,7 @@ public class Main {
          System.out.println("Hola compañeritos");
          System.out.println("Daniel Alcca no entra aun al systema");
          
-
+  System.out.println("Daniel Alcca no entra aun al systema dice daniel f");
     }
     
 }
