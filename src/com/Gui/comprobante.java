@@ -39,7 +39,7 @@ public class comprobante extends javax.swing.JFrame {
         jlblcorrelativo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jpnltextos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jtxtNombre = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class comprobante extends javax.swing.JFrame {
         jtxtSubtotal = new javax.swing.JTextField();
         jtxtIgv = new javax.swing.JTextField();
         jtxtTotal = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
+        jbtnbotones = new javax.swing.JPanel();
         jbtnAgregar = new javax.swing.JButton();
         jbtnEliminar = new javax.swing.JButton();
         jbtnActualizar = new javax.swing.JButton();
@@ -105,41 +105,41 @@ public class comprobante extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 190, 110));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnltextos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setText("Señor(es) :");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel3.add(jtxtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 290, -1));
+        jpnltextos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jpnltextos.add(jtxtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 290, -1));
 
         jLabel11.setText("DNI :");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
-        jPanel3.add(jtxtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 80, -1));
-        jPanel3.add(jtxtCodigocli, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 80, -1));
+        jpnltextos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+        jpnltextos.add(jtxtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 80, -1));
+        jpnltextos.add(jtxtCodigocli, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 80, -1));
 
         jLabel12.setText("Codigo:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+        jpnltextos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
         jLabel13.setText("Fecha :");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
+        jpnltextos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         jtxtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtFechaActionPerformed(evt);
             }
         });
-        jPanel3.add(jtxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 90, -1));
+        jpnltextos.add(jtxtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 90, -1));
 
         jLabel10.setText("Direccion :");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jpnltextos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jtxtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtDireccionActionPerformed(evt);
             }
         });
-        jPanel3.add(jtxtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 290, -1));
+        jpnltextos.add(jtxtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 290, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 670, 70));
+        getContentPane().add(jpnltextos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 670, 70));
 
         jtblComprobante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,21 +204,21 @@ public class comprobante extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 680, 220));
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jbtnbotones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbtnAgregar.setText("AGREGAR");
-        jPanel5.add(jbtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+        jbtnbotones.add(jbtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
         jbtnEliminar.setText("ELIMINAR");
-        jPanel5.add(jbtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jbtnbotones.add(jbtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jbtnActualizar.setText("ACTUALIZAR");
-        jPanel5.add(jbtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
+        jbtnbotones.add(jbtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jbtnSalir.setText("SALIR");
-        jPanel5.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+        jbtnbotones.add(jbtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 680, 60));
+        getContentPane().add(jbtnbotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 680, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,16 +284,16 @@ public class comprobante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnActualizar;
     private javax.swing.JButton jbtnAgregar;
     private javax.swing.JButton jbtnEliminar;
     private javax.swing.JButton jbtnSalir;
+    private javax.swing.JPanel jbtnbotones;
     private javax.swing.JLabel jlblcorrelativo;
     private javax.swing.JLabel jlblserie;
+    private javax.swing.JPanel jpnltextos;
     private javax.swing.JTable jtblComprobante;
     private javax.swing.JTextField jtxtCodigocli;
     private javax.swing.JTextField jtxtDireccion;
