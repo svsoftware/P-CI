@@ -6,7 +6,14 @@
 
 package com.Gui;
 
+import com.conexion.conexion;
+import java.awt.Color;
 import java.net.InetAddress;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -18,21 +25,88 @@ import java.net.InetAddress;
  * 
  */
 public class LoginForm extends javax.swing.JFrame {
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    conexion jCn = new conexion();
+        String on = "a";
+    String off = "d";
 
     /** Creates new form LoginForm */
     public LoginForm() {
+        con = jCn.connection();
         initComponents();
         getIP();
     }
     void getIP(){
         try{
             InetAddress ip = InetAddress.getLocalHost();
-            jlblIP.setText(ip.getHostAddress());
+            jtxtmensaje.setText(ip.getHostAddress());
         }catch(Exception e){
-            jlblIP.setText("Error");
+            jtxtmensaje.setText("Error");
             e.getMessage();
         }
     }
+    public void getIds(){
+       String x = "SELECT cod_ven from vendedor where nom_ven='" + jtxtusuario.getText() + "'";
+       try{
+           ps = con.prepareStatement(x);
+           rs = ps.executeQuery();
+           
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(rootPane, ex);
+       }
+   }
+    public void login(){
+       String id,pass, crip;
+               id = jtxtusuario.getText();
+               pass = jpassword.getText();
+               crip = DigestUtils.md5Hex(pass);
+               if(id.equals("user") &&  pass.equals("user")){
+                   JOptionPane.showMessageDialog(null,
+        "Administrador '" + id + "' Activado.",
+        "Programmer",
+        JOptionPane.INFORMATION_MESSAGE);
+                // LLAMA FORM
+                
+                this.dispose();
+               }
+       if(jtxtusuario.getText().isEmpty() || jpassword.getText().isEmpty()){
+         jtxtmensaje.setForeground(Color.DARK_GRAY);
+         jtxtmensaje.setText("Ingrese usuario/Contraseña");
+         jtxtusuario.setText("");
+         jtxtusuario.requestFocus();
+         
+       }else{
+               String i = "SELECT * FROM vendedor WHERE  nom_ven= ? AND  pass_ven = ? and estado_ven = ?";
+               
+        try{
+            ps = con.prepareStatement(i);
+            ps.setString(1, id);
+            ps.setString(2, crip);
+            ps.setString(3, on);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                jtxtmensaje.setForeground(Color.green);
+                jtxtmensaje.setText("Correcto");
+
+                //ENTRA A OTRO FORM
+                String strId = "SELECT cod_ven from vendedor where nom_ven='" + jtxtusuario.getText() + "'";
+                String strPermiso ="SELECT user_ven from vendedor where nom_ven='"+jtxtusuario.getText()+"'";
+        try{
+           String p,c;
+           ps = con.prepareStatement(strPermiso);
+           rs = ps.executeQuery();
+           
+       }catch(Exception ex){ex.printStackTrace();}
+                this.dispose();
+            }else{
+                jtxtmensaje.setForeground(Color.red);
+                jtxtmensaje.setText("Usuario o Contraseña Incorrecta!");
+            }
+        }catch(Exception e){JOptionPane.showMessageDialog(null, e);}
+       }
+   }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -45,23 +119,23 @@ public class LoginForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtxtusuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jpassword = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jbtnEnter = new javax.swing.JButton();
-        jBtnCancel = new javax.swing.JButton();
-        jlblIP = new javax.swing.JLabel();
+        btnEntrar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jtxtmensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Usuario:");
 
-        jTextField1.setText("jTextField1");
+        jtxtusuario.setText("jTextField1");
 
         jLabel2.setText("Contraseña:");
 
-        jTextField2.setText("jTextField2");
+        jpassword.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,8 +148,8 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -84,19 +158,24 @@ public class LoginForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jbtnEnter.setText("Entrar");
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
-        jBtnCancel.setText("Salir");
+        btnSalir.setText("Salir");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,17 +184,17 @@ public class LoginForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBtnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnEnter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbtnEnter)
+                .addComponent(btnEntrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnCancel)
+                .addComponent(btnSalir)
                 .addContainerGap())
         );
 
@@ -132,7 +211,7 @@ public class LoginForm extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jlblIP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jtxtmensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -142,12 +221,17 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlblIP, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtxtmensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here
+        login();
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,15 +269,15 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCancel;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton jbtnEnter;
-    private javax.swing.JLabel jlblIP;
+    private javax.swing.JTextField jpassword;
+    private javax.swing.JLabel jtxtmensaje;
+    private javax.swing.JTextField jtxtusuario;
     // End of variables declaration//GEN-END:variables
 
 }
