@@ -8,7 +8,9 @@ package com.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,5 +38,10 @@ public class conexion {
         }
         return jCnn;
     }
-
+    public PreparedStatement getPst(String Isql){
+        return null;
+    }
+    public Statement getStm (){
+        return null;
+    }
 }

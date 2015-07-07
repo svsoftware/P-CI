@@ -188,6 +188,7 @@ CREATE TABLE `vendedor` (
   `estcivil_ven` varchar(1) NOT NULL,
   `estado_ven` varchar(1) NOT NULL,
   `email_ven` varchar(200) DEFAULT NULL,
+  `pass_ven` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`cod_ven`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -198,7 +199,7 @@ CREATE TABLE `vendedor` (
 
 LOCK TABLES `vendedor` WRITE;
 /*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
-INSERT INTO `vendedor` VALUES ('VE0001','Juan','Fernando Uribe','48571232','Las Gardenias #5762','951204796','C','A','juribe@hotmail.com'),('VE0002','Andres','Galvez Gutierrez','49743120','AV. Jesus #1254','487410236','S','A','galvez_andre@homail.com'),('VE0003','Jenniffer','Condori Choque','47510248','AV. Parra S/N','978410369','S','A','jenni_12@gmail.com'),('VE0004','Gabriel','Hernandez','46218219','las colmenas #360','862182193','C','A','hernandez_ga@hotmail.com'),('VE0005','Jorge','Vargar','46218219','Calle Alvares Tomas','948394546','S','A','jorgito_92@hotmail.com'),('VE0006','Carlos','Tejada','48345235','Calle Sanchez Peraltilla #425','43565356','S','A','tejada@hotmail.com'),('VE0007','Maribel','LLerena','53563325','AV. Las Palmeras','954728495','S','A','mari_12_45@gmail.com'),('VE0008','Alejandro','Portillo','43566245','Calle 8 de Octubre #567','954352245','S','A','alejandro@gmail.com'),('VE0009','Maria','Galribaldi','48356943','AV. Santa rosa #364','954683465','S','A','mari@gmail.com'),('VE0010','Mariela','Flores Rocio','45678532','AV. Javier Prado #2170','964245684','S','A','Mariela_FR@gmail'),('VE0011','Adrian','Shepard','64367859','Calle minerva Piñares','845635678','S','A','adri_shepard@gmail.com'),('VE0012','Daniel','Vizcarra','74583950','AV. jerusalen #873','84376546','S','A','dani_viz@hotmail.com');
+INSERT INTO `vendedor` VALUES ('VE0001','Juan','Fernando Uribe','48571232','Las Gardenias #5762','951204796','C','A','juribe@hotmail.com','202cb962ac59075b964b07152d234b70'),('VE0002','Andres','Galvez Gutierrez','49743120','AV. Jesus #1254','487410236','S','A','galvez_andre@homail.com',NULL),('VE0003','Jenniffer','Condori Choque','47510248','AV. Parra S/N','978410369','S','A','jenni_12@gmail.com',NULL),('VE0004','Gabriel','Hernandez','46218219','las colmenas #360','862182193','C','A','hernandez_ga@hotmail.com',NULL),('VE0005','Jorge','Vargar','46218219','Calle Alvares Tomas','948394546','S','A','jorgito_92@hotmail.com',NULL),('VE0006','Carlos','Tejada','48345235','Calle Sanchez Peraltilla #425','43565356','S','A','tejada@hotmail.com',NULL),('VE0007','Maribel','LLerena','53563325','AV. Las Palmeras','954728495','S','A','mari_12_45@gmail.com',NULL),('VE0008','Alejandro','Portillo','43566245','Calle 8 de Octubre #567','954352245','S','A','alejandro@gmail.com',NULL),('VE0009','Maria','Galribaldi','48356943','AV. Santa rosa #364','954683465','S','A','mari@gmail.com',NULL),('VE0010','Mariela','Flores Rocio','45678532','AV. Javier Prado #2170','964245684','S','A','Mariela_FR@gmail',NULL),('VE0011','Adrian','Shepard','64367859','Calle minerva Piñares','845635678','S','A','adri_shepard@gmail.com',NULL),('VE0012','Daniel','Vizcarra','74583950','AV. jerusalen #873','84376546','S','A','dani_viz@hotmail.com',NULL);
 /*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-10 20:01:23
+-- Dump completed on 2015-07-07 18:14:36

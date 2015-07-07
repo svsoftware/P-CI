@@ -6,6 +6,7 @@
 
 package com.Gui;
 
+import com.Classes.PersonClass;
 import com.conexion.conexion;
 import java.awt.Color;
 import java.net.InetAddress;
@@ -14,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
-
+import com.utilities.Validate;
 /**
  *
  * @author Christianlp
@@ -29,8 +30,11 @@ public class LoginForm extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement ps = null;
     conexion jCn = new conexion();
-        String on = "a";
+        String on = "A";
     String off = "d";
+    
+    PersonClass p = new PersonClass();
+    Validate v = new Validate();
 
     /** Creates new form LoginForm */
     public LoginForm() {
@@ -58,13 +62,14 @@ public class LoginForm extends javax.swing.JFrame {
        }
    }
     public void login(){
-       String id,pass, crip;
-               id = jtxtusuario.getText();
-               pass = jpassword.getText();
-               crip = DigestUtils.md5Hex(pass);
-               if(id.equals("user") &&  pass.equals("user")){
+       String  crip;
+       p.setName(jtxtusuario.getText());
+       p.setPass(jpassword.getText());
+//               crip = DigestUtils.md5Hex(p.getPass());
+               v.covertMD5(p.getPass());
+               if(p.getName().equals("user") &&  p.getPass().equals("user")){
                    JOptionPane.showMessageDialog(null,
-        "Administrador '" + id + "' Activado.",
+        "Administrador '" + p.getName()+ "' Activado.",
         "Programmer",
         JOptionPane.INFORMATION_MESSAGE);
                 // LLAMA FORM
@@ -82,17 +87,18 @@ public class LoginForm extends javax.swing.JFrame {
                
         try{
             ps = con.prepareStatement(i);
-            ps.setString(1, id);
-            ps.setString(2, crip);
+            ps.setString(1, p.getName());
+            ps.setString(2, v.covertMD5(p.getPass()));
             ps.setString(3, on);
             rs = ps.executeQuery();
             if(rs.next()){
                 jtxtmensaje.setForeground(Color.green);
                 jtxtmensaje.setText("Correcto");
-
                 //ENTRA A OTRO FORM
                 String strId = "SELECT cod_ven from vendedor where nom_ven='" + jtxtusuario.getText() + "'";
-                String strPermiso ="SELECT user_ven from vendedor where nom_ven='"+jtxtusuario.getText()+"'";
+                String strPermiso ="SELECT nom_ven from vendedor where nom_ven='"+jtxtusuario.getText()+"'";
+                new FPerson().setVisible(true);
+                
         try{
            String p,c;
            ps = con.prepareStatement(strPermiso);
@@ -103,6 +109,7 @@ public class LoginForm extends javax.swing.JFrame {
             }else{
                 jtxtmensaje.setForeground(Color.red);
                 jtxtmensaje.setText("Usuario o Contraseña Incorrecta!");
+                System.out.println("el codigo es " + v.covertMD5(p.getPass()));
             }
         }catch(Exception e){JOptionPane.showMessageDialog(null, e);}
        }
