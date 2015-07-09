@@ -4,7 +4,7 @@ USE `dbventas`;
 --
 -- Host: 127.0.0.1    Database: dbventas
 -- ------------------------------------------------------
--- Server version	5.5.20-log
+-- Server version	5.6.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -128,6 +128,7 @@ CREATE TABLE `productos` (
   `descrip_pro` varchar(200) NOT NULL,
   `precio_pro` decimal(15,2) NOT NULL,
   `stock_pro` int(11) NOT NULL,
+  `fecha_ingres_pro` date NOT NULL,
   PRIMARY KEY (`cod_pro`),
   KEY `fk_codpv_idx` (`cod_proveedor`),
   CONSTRAINT `fk_codpv` FOREIGN KEY (`cod_proveedor`) REFERENCES `proveedor` (`cod_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -140,7 +141,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES ('PR0001','PV0001','Impresora Eson',450.30,10),('PR0002','PV0002','Impresora Eson  termica',950.30,5),('PR0003','PV0002','Disco duro portable toshiba 1tb',550.00,8),('PR0004','PV0004','Placa gigabite A-77',500.00,12),('PR0005','PV0005','Tarjet de red tepelink',45.20,45),('PR0006','PV0002','Toner de impresora espon',790.00,24),('PR0007','PV0003','Microprocesador I5',1200.00,17),('PR0008','PV0004','Camaras ocultas',450.30,5),('PR0009','PV0005','Router',234.00,3),('PR0010','PV0003','Monitores LG',670.00,10),('PR0011','PV0003','Monitores samsung',664.30,10),('PR0012','PV0004','Estabilizador Forza',70.00,7);
+INSERT INTO `productos` VALUES ('PR0001','PV0001','Impresora Eson',450.30,10,'0000-00-00'),('PR0002','PV0002','Impresora Eson  termica',950.30,5,'0000-00-00'),('PR0003','PV0002','Disco duro portable toshiba 1tb',550.00,8,'0000-00-00'),('PR0004','PV0004','Placa gigabite A-77',500.00,12,'0000-00-00'),('PR0005','PV0005','Tarjet de red tepelink',45.20,45,'0000-00-00'),('PR0006','PV0002','Toner de impresora espon',790.00,24,'0000-00-00'),('PR0007','PV0003','Microprocesador I5',1200.00,17,'0000-00-00'),('PR0008','PV0004','Camaras ocultas',450.30,5,'0000-00-00'),('PR0009','PV0005','Router',234.00,3,'0000-00-00'),('PR0010','PV0003','Monitores LG',670.00,10,'0000-00-00'),('PR0011','PV0003','Monitores samsung',664.30,10,'0000-00-00'),('PR0012','PV0004','Estabilizador Forza',70.00,7,'0000-00-00');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,6 +155,7 @@ DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE `proveedor` (
   `cod_proveedor` varchar(6) NOT NULL,
   `nom_pv` varchar(200) NOT NULL,
+  `ruc_pv` varchar(11) DEFAULT NULL,
   `dir_pv` varchar(200) NOT NULL,
   `tel_pv` varchar(9) DEFAULT NULL,
   `email_pv` varchar(100) DEFAULT NULL,
@@ -167,7 +169,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-INSERT INTO `proveedor` VALUES ('PV0001','Ramiro distribuciones S.R.L','Calle pierola #243','984376546','ramiro_@hotmail.com'),('PV0002','Sagen Peru Wordk S.A','Calle los delirios SN','974627436','sagenperu@hotmail.com'),('PV0003','C.N.C Industrial S.R.L','Calle pizarro #234','984376546','CNC_industrial_@gmail.com'),('PV0004','Corporación Mara S.A','AV Avicion #6702','984376546','Corpo_Mara@hotmail.com'),('PV0005','computec','Calle Muños najar SN','984376546','ramiro_@hotmail.com');
+INSERT INTO `proveedor` VALUES ('PV0001','Ramiro distribuciones S.R.L',NULL,'Calle pierola #243','984376546','ramiro_@hotmail.com'),('PV0002','Sagen Peru Wordk S.A',NULL,'Calle los delirios SN','974627436','sagenperu@hotmail.com'),('PV0003','C.N.C Industrial S.R.L',NULL,'Calle pizarro #234','984376546','CNC_industrial_@gmail.com'),('PV0004','Corporación Mara S.A',NULL,'AV Avicion #6702','984376546','Corpo_Mara@hotmail.com'),('PV0005','computec',NULL,'Calle Muños najar SN','984376546','ramiro_@hotmail.com');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,10 +187,8 @@ CREATE TABLE `vendedor` (
   `dni_ven` varchar(8) NOT NULL,
   `dir_ven` varchar(200) NOT NULL,
   `tel_ven` varchar(9) NOT NULL,
-  `estcivil_ven` varchar(1) NOT NULL,
   `estado_ven` varchar(1) NOT NULL,
   `email_ven` varchar(200) DEFAULT NULL,
-  `pass_ven` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`cod_ven`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -199,7 +199,7 @@ CREATE TABLE `vendedor` (
 
 LOCK TABLES `vendedor` WRITE;
 /*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
-INSERT INTO `vendedor` VALUES ('VE0001','Juan','Fernando Uribe','48571232','Las Gardenias #5762','951204796','C','A','juribe@hotmail.com','202cb962ac59075b964b07152d234b70'),('VE0002','Andres','Galvez Gutierrez','49743120','AV. Jesus #1254','487410236','S','A','galvez_andre@homail.com',NULL),('VE0003','Jenniffer','Condori Choque','47510248','AV. Parra S/N','978410369','S','A','jenni_12@gmail.com',NULL),('VE0004','Gabriel','Hernandez','46218219','las colmenas #360','862182193','C','A','hernandez_ga@hotmail.com',NULL),('VE0005','Jorge','Vargar','46218219','Calle Alvares Tomas','948394546','S','A','jorgito_92@hotmail.com',NULL),('VE0006','Carlos','Tejada','48345235','Calle Sanchez Peraltilla #425','43565356','S','A','tejada@hotmail.com',NULL),('VE0007','Maribel','LLerena','53563325','AV. Las Palmeras','954728495','S','A','mari_12_45@gmail.com',NULL),('VE0008','Alejandro','Portillo','43566245','Calle 8 de Octubre #567','954352245','S','A','alejandro@gmail.com',NULL),('VE0009','Maria','Galribaldi','48356943','AV. Santa rosa #364','954683465','S','A','mari@gmail.com',NULL),('VE0010','Mariela','Flores Rocio','45678532','AV. Javier Prado #2170','964245684','S','A','Mariela_FR@gmail',NULL),('VE0011','Adrian','Shepard','64367859','Calle minerva Piñares','845635678','S','A','adri_shepard@gmail.com',NULL),('VE0012','Daniel','Vizcarra','74583950','AV. jerusalen #873','84376546','S','A','dani_viz@hotmail.com',NULL);
+INSERT INTO `vendedor` VALUES ('VE0001','Juan','Fernando Uribe','48571232','Las Gardenias #5762','951204796','A','juribe@hotmail.com'),('VE0002','Andres','Galvez Gutierrez','49743120','AV. Jesus #1254','487410236','A','galvez_andre@homail.com'),('VE0003','Jenniffer','Condori Choque','47510248','AV. Parra S/N','978410369','A','jenni_12@gmail.com'),('VE0004','Gabriel','Hernandez','46218219','las colmenas #360','862182193','A','hernandez_ga@hotmail.com'),('VE0005','Jorge','Vargar','46218219','Calle Alvares Tomas','948394546','A','jorgito_92@hotmail.com'),('VE0006','Carlos','Tejada','48345235','Calle Sanchez Peraltilla #425','43565356','A','tejada@hotmail.com'),('VE0007','Maribel','LLerena','53563325','AV. Las Palmeras','954728495','A','mari_12_45@gmail.com'),('VE0008','Alejandro','Portillo','43566245','Calle 8 de Octubre #567','954352245','A','alejandro@gmail.com'),('VE0009','Maria','Galribaldi','48356943','AV. Santa rosa #364','954683465','A','mari@gmail.com'),('VE0010','Mariela','Flores Rocio','45678532','AV. Javier Prado #2170','964245684','A','Mariela_FR@gmail'),('VE0011','Adrian','Shepard','64367859','Calle minerva Piñares','845635678','A','adri_shepard@gmail.com'),('VE0012','Daniel','Vizcarra','74583950','AV. jerusalen #873','84376546','A','dani_viz@hotmail.com');
 /*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -212,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-07 18:14:36
+-- Dump completed on 2015-07-09 17:42:48
