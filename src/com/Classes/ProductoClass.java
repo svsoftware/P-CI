@@ -12,12 +12,17 @@ import java.sql.Date;
  * @author daniel
  */
 public class ProductoClass extends PersonClass{
+    private String cod_producto;
     private String cod_proveedor;
     private String descripcion;
     private double precio,stock;
     private Date fecha;
 
-    public ProductoClass(String cod_proveedor, String descripcion, double precio, double stock, Date fecha) {
+    public ProductoClass() {
+    }
+
+    public ProductoClass(String cod_producto, String cod_proveedor, String descripcion, double precio, double stock, Date fecha) {
+        this.cod_producto = cod_producto;
         this.cod_proveedor = cod_proveedor;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -25,7 +30,12 @@ public class ProductoClass extends PersonClass{
         this.fecha = fecha;
     }
 
-    public ProductoClass() {
+    public String getCod_producto() {
+        return cod_producto;
+    }
+
+    public void setCod_producto(String cod_producto) {
+        this.cod_producto = cod_producto;
     }
 
     public String getCod_proveedor() {
@@ -67,7 +77,4 @@ public class ProductoClass extends PersonClass{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
-    
-    
-}
+ }
