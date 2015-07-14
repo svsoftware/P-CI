@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package com.Interfaces;
+import com.Classes.ProveedorClass;
 
 /**
  *
  * @author Christianlp
  */
-public interface InterfaceOp {
+public interface InterfaceOp  {
+    
     void insertarRegistro();
     void modificar();
     void actualizar();

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
 
 /**
  *
@@ -39,10 +40,11 @@ public class conexion {
         }
         return jCnn;
     }
-    public PreparedStatement getPst(String Isql){
-        return null;
-    }
-    public Statement getStm (){
-        return null;
-    }
+//    public PreparedStatement getPst(String Isql){
+//        
+//        return null;
+//    }
+//    public Statement getStm (){
+//        return null;
+//    }
 }
