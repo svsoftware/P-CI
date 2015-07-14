@@ -27,6 +27,7 @@ public class conexion {
     private static final String USER ="root";
     private static final String PW = "";
     Connection jCnn = null;
+    
     public Connection connection(){
         try{
             Class.forName(DRIVER);
